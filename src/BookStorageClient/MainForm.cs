@@ -16,5 +16,11 @@ namespace BookStorageClient
         {
             InitializeComponent();
         }
+
+        private void btnSendMessage_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(txtMessage.Text);
+        }
     }
+
 }
