@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStorageClient", "src\BookStorageClient\BookStorageClient.csproj", "{192370B1-03D9-4C79-A1AD-D3924230B334}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypyDanych", "TypyDanych\TypyDanych.csproj", "{46FF7390-8F73-4DE7-A54A-48EEB1EE79DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleClassLibrary", "SampleClassLibrary\SampleClassLibrary.csproj", "{76A1AC4D-086A-446B-AFFB-D2DFA9E82AD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{192370B1-03D9-4C79-A1AD-D3924230B334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{192370B1-03D9-4C79-A1AD-D3924230B334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{192370B1-03D9-4C79-A1AD-D3924230B334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FF7390-8F73-4DE7-A54A-48EEB1EE79DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FF7390-8F73-4DE7-A54A-48EEB1EE79DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FF7390-8F73-4DE7-A54A-48EEB1EE79DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FF7390-8F73-4DE7-A54A-48EEB1EE79DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76A1AC4D-086A-446B-AFFB-D2DFA9E82AD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76A1AC4D-086A-446B-AFFB-D2DFA9E82AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76A1AC4D-086A-446B-AFFB-D2DFA9E82AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76A1AC4D-086A-446B-AFFB-D2DFA9E82AD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
