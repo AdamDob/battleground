@@ -34,7 +34,7 @@
             // 
             // btnSendMessage
             // 
-            this.btnSendMessage.Location = new System.Drawing.Point(118, 10);
+            this.btnSendMessage.Location = new System.Drawing.Point(133, 9);
             this.btnSendMessage.Name = "btnSendMessage";
             this.btnSendMessage.Size = new System.Drawing.Size(101, 23);
             this.btnSendMessage.TabIndex = 0;
