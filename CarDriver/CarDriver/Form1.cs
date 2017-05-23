@@ -12,43 +12,41 @@ namespace CarDriver
 {
     public partial class Form1 : Form
     {
-        Kolko gracz = new Kolko();
-        Kolko przeszkoda = new Kolko();
+        Kolko gracz;
         Timer time = new Timer();
+        List<Kolko> Przeszkody = new List<Kolko>();
+       
+ 
         public Form1()
         {
             InitializeComponent();
+
+            WindowState = FormWindowState.Maximized;
             DoubleBuffered = true;
-            this.KeyDown += Form1_KeyDown;
-
-            gracz.X = 50;
-            gracz.Y = 70;
-            gracz.Promien = 40;
-            gracz.Kolor = Color.Black;
-            gracz.PredkoscX = 0;
-            gracz.PredkoscY = 0;
-
-            przeszkoda.X = 650;
-            przeszkoda.Y = 40;
-            przeszkoda.Promien = 20;
-            przeszkoda.Kolor = Color.Red;
-            przeszkoda.PredkoscX = 10;
-            przeszkoda.PredkoscY = -1;
-
+            KeyDown += Form1_KeyDown;
             time.Tick += Time_Tick;
-            time.Interval = 10;
+            time.Interval = 1;
             time.Start();
-
+            
         }
-
+        
         private void Time_Tick(object sender, EventArgs e)
         {
             gracz.PrzeliczPolozenie(ClientRectangle);
-            przeszkoda.PrzeliczPolozenie(ClientRectangle);
-            var odcinek = Math.Sqrt(Math.Pow(przeszkoda.X - gracz.X, 2) + Math.Pow(przeszkoda.Y - gracz.Y, 2));
-            if(odcinek <= gracz.Promien + przeszkoda.Promien)
+
+            foreach (var kolejnaPrzeszkoda in Przeszkody.ToArray())
             {
-                time.Stop();
+                kolejnaPrzeszkoda.PrzeliczPolozenie(ClientRectangle);
+                bool czyKolizja = gracz.WykryjKolizje(kolejnaPrzeszkoda);
+                if (czyKolizja)
+                {
+                    Przeszkody.Remove(kolejnaPrzeszkoda);
+                }
+                //if(gracz.WykryjKolizje(kolejnaPrzeszkoda))
+                //{
+                //    Przeszkody.Remove(kolejnaPrzeszkoda);
+                //}
+                    
             }
             Invalidate();
         }
@@ -57,42 +55,80 @@ namespace CarDriver
         {
             if (e.KeyCode == Keys.Up)
             {
-                gracz.PredkoscY--;
-                przeszkoda.PredkoscY--;
+                gracz.PredkoscY -= 2;
             }
             if (e.KeyCode == Keys.Down)
             {
-                gracz.PredkoscY++;
+                gracz.PredkoscY += 2;
             }
             if (e.KeyCode == Keys.Right)
             {
-                gracz.PredkoscX++;
+                gracz.PredkoscX += 2;
             }
             if (e.KeyCode == Keys.Left)
             {
-                gracz.PredkoscX--;
+                gracz.PredkoscX -= 2;
             }
-            Invalidate();
+            if (e.KeyCode == Keys.Space)
+            {
+               //1. sprawdz ile jest jablek
+               //2. podziel na dwie czesci
+               //3. usun jedna z czesci
+               ///----///
+               // jedno wyrzucam drugie zostawiam 
+               for(int i = 0; i < Przeszkody.Count; i++)
+                {
+                    if(i %2==0 )
+                    {
+                        Przeszkody.RemoveAt(i);
+                    }
+                }
+            }
+
+            if(e.KeyCode == Keys.A)
+            {
+                for (int i = 0; i < 20; i++)
+                {
+                    Przeszkody.Add(new Kolko(ClientRectangle));
+                }
+            }
+           
         }
-        
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            
-            //czyszczenie obiektu
-            using (var brush = new SolidBrush(gracz.Kolor))
+            gracz.Narysuj(e.Graphics);
+            foreach(var obj in Przeszkody)
             {
-                    e.Graphics.FillEllipse(brush, gracz.X - gracz.Promien, gracz.Y - gracz.Promien, gracz.Promien *2 , gracz.Promien *2);
-                    
-            }
-            using (var brush = new SolidBrush(przeszkoda.Kolor))
-            {
-                e.Graphics.FillEllipse(brush, przeszkoda.X - przeszkoda.Promien, przeszkoda.Y - przeszkoda.Promien,
-                    przeszkoda.Promien * 2, przeszkoda.Promien * 2);
+                obj.Narysuj(e.Graphics);
             }
             
-
         }
 
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            gracz = new Kolko(ClientRectangle);
+
+            gracz.X = 50;
+            gracz.Y = 70;
+            gracz.Promien = 40;
+            gracz.Kolor = Color.Black;
+            gracz.PredkoscX = 100;
+            gracz.PredkoscY = 0;
+
+            for(int i = 0; i < 200; i++)
+            {
+                Przeszkody.Add(new Kolko(ClientRectangle));
+            }
+        }
     }
 }
+/*
+ Wyswietlanie wyniku
+ ilosc zyc
+ zmienic gracza
+ pasek z nowa gra
+ pasek zycia
+
+  */
